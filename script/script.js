@@ -4,7 +4,7 @@ const inputH = document.querySelector(`#inputH`);
 const inputM = document.querySelector(`#inputM`);
 const inputS = document.querySelector(`#inputS`);
 const closeBtn = document.querySelector(`.close`);
-const resetBanner = document.querySelector(`form`);
+const resetBanner = document.querySelector(`.formsec`);
 const startBtn = document.querySelector(`#timeStart`);
 const resetBtn = document.querySelector(`#timeReset`);
 const dsH = document.querySelector(`#dsH`);
@@ -40,6 +40,7 @@ function submitForm() {
   setInnerHTML(dsM, timeM);
   setInnerHTML(dsS, timeS);
   setInnerHTML(dsMS, 0);
+
   closeForm();
 
   window.clearInterval(countFN);

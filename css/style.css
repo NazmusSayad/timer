@@ -58,22 +58,26 @@ header > h1 {
   font-size: 1.5rem;
   font-weight: bold;
 }
-form {
-  transition: 1s;
+.formsec {
   display: none;
-  font-weight: normal;
-  padding: 100px 0;
-  backdrop-filter: blur(5px);
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
+  transition: 1s;
+  padding: 100px 0;
   left: 0;
+  backdrop-filter: blur(5px);
+  font-weight: normal;
 }
 
 form input {
   width: 60px;
-  font-size: 18px;
+  font-size: 22px;
+  height: 31px;
+  border: none;
+  outline: none;
+  margin-left: 5px;
 }
 
 form > div {
@@ -85,6 +89,10 @@ form > div {
 form > div > div {
   display: flex;
   margin: 0 15px;
+}
+.formsec button {
+  font-size: large;
+  padding: 5px 10px;
 }
 #saveBtn {
   width: fit-content;

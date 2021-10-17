@@ -24,28 +24,30 @@
         <div onclick="openForm()" id="timeReset">Reset</div>
       </div>
 
-      <form action="#" onsubmit="submitForm()">
+      <div class="formsec">
         <button onclick="closeForm()" class="close">Close</button>
 
-        <div>
+        <form action="#" onsubmit="submitForm()">
           <div>
-            <span>H:</span>
-            <input id="inputH" min="0" type="number" />
+            <div>
+              <span>H =</span>
+              <input placeholder="0" id="inputH" min="0" type="number" />
+            </div>
+
+            <div>
+              <span>M =</span>
+              <input placeholder="0" id="inputM" min="0" max="59" type="number" />
+            </div>
+
+            <div>
+              <span>S =</span>
+              <input placeholder="0" id="inputS" min="0" max="59" type="number" />
+            </div>
           </div>
 
-          <div>
-            <span>M:</span>
-            <input id="inputM" min="0" max="59" type="number" />
-          </div>
-
-          <div>
-            <span>S:</span>
-            <input id="inputS" min="0" max="59" type="number" />
-          </div>
-        </div>
-
-        <input type="submit" />
-      </form>
+          <button>Submit</button>
+        </form>
+      </div>
     </div>
     <footer>
       <p>Press Space or Enter to Start/Stop and Shift to reset</p>
