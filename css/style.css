@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -11,9 +11,9 @@ html {
   text-align: center;
   width: 100vw;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -23,12 +23,12 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 100vh;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 header > h1 {
@@ -36,7 +36,7 @@ header > h1 {
   font-weight: normal;
 }
 
-#timesec {
+.timesec {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
@@ -46,11 +46,11 @@ header > h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-#timesec p {
+.timesec p {
   padding: 9px 5px 0;
 }
 
@@ -58,7 +58,38 @@ header > h1 {
   font-size: 1.5rem;
   font-weight: bold;
 }
+form {
+  transition: 3s;
+  display: none;
+  font-weight: normal;
+  padding: 100px 0;
+  backdrop-filter: blur(5px);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
 
+form input {
+  width: 60px;
+  font-size: 18px;
+}
+
+form > div {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 30px auto;
+}
+form > div > div {
+  display: flex;
+  margin: 0 15px;
+}
+#saveBtn {
+  width: fit-content;
+  margin: 0 auto;
+}
 #timeStart,
 #timeReset {
   min-width: 100px;
@@ -68,4 +99,8 @@ header > h1 {
   cursor: pointer;
   background-color: aquamarine;
   border-radius: 5px;
+}
+.controlSec .timesec {
+  font-weight: normal;
+  font-size: 2rem;
 }

@@ -1,79 +1,111 @@
-const timeStart = document.querySelector(`#timeStart`);
-const timeReset = document.querySelector(`#timeReset`);
-const timehours = document.querySelector(`#timehours`);
-const timeMinutes = document.querySelector(`#timeMinutes`);
-const timeSeconds = document.querySelector(`#timeSeconds`);
-const timeMiliSeconds = document.querySelector(`#timeMiliSeconds`);
+const inputH = document.querySelector(`#inputH`);
+const inputM = document.querySelector(`#inputM`);
+const inputS = document.querySelector(`#inputS`);
+const closeBtn = document.querySelector(`.close`);
+const resetBanner = document.querySelector(`form`);
+const startBtn = document.querySelector(`#timeStart`);
+const resetBtn = document.querySelector(`#timeReset`);
+const dsH = document.querySelector(`#dsH`);
+const dsM = document.querySelector(`#dsM`);
+const dsS = document.querySelector(`#dsS`);
+const dsMS = document.querySelector(`#dsMS`);
 
-let time = [0, 0, 0, 0];
+const timeUpAudio = new Audio("../media/1.webm");
+const timeUpAudio2 = new Audio("../media/2.webm");
+
+let timeH;
+let timeM;
+let timeS;
+let timeMS;
 let i = 1;
-let timer;
+let countFN;
 
-function timeUpdate(v1, v2) {
-  if (v2 < 10) {
-    v1.innerHTML = "0" + v2;
+function closeForm() {
+  resetBanner.removeAttribute(`style`);
+}
+function openForm() {
+  resetBanner.style.display = `block`;
+}
+function submitForm() {
+  timeH = Number(inputH.value);
+  timeM = Number(inputM.value);
+  timeS = Number(inputS.value);
+  timeMS = 0;
+
+  setInnerHTML(dsH, timeH);
+  setInnerHTML(dsM, timeM);
+  setInnerHTML(dsS, timeS);
+  setInnerHTML(dsMS, 0);
+  closeForm();
+
+  window.clearInterval(countFN);
+  startBtn.innerHTML = "Start";
+  i = 1;
+
+  console.log(timeH, timeM, timeS);
+}
+
+function setInnerHTML(a, b) {
+  if (b < 10) {
+    a.innerHTML = "0" + b;
   } else {
-    v1.innerHTML = v2;
+    a.innerHTML = b;
   }
 }
 
-function playPause() {
+function startStop() {
   if (i) {
+    count();
+    startBtn.innerHTML = "Stop";
     i = 0;
-    countStart();
-    timeStart.innerHTML = "Stop";
   } else {
-    window.clearInterval(timer);
-    timeStart.innerHTML = "Start";
+    window.clearInterval(countFN);
+    startBtn.innerHTML = "Start";
     i = 1;
   }
 }
-function reset() {
-  window.clearInterval(timer);
-  timeStart.innerHTML = "Start";
-  time = [0, 0, 0, 0];
-  timeUpdate(timeMiliSeconds, 0);
-  timeUpdate(timeSeconds, 0);
-  timeUpdate(timeMinutes, 0);
-  timeUpdate(timehours, 0);
-  i = 1;
-}
-function countStart() {
-  timer = window.setInterval(() => {
-    time[3]++;
 
-    if (time[3] >= 100) {
-      time[2]++;
-      timeUpdate(timeSeconds, time[2]);
-      time[3] = 0;
+function count() {
+  countFN = window.setInterval(() => {
+    timeMS--;
+    setInnerHTML(dsMS, timeMS);
+    if (timeMS < 1) {
+      if (timeS > 0) {
+        timeS--;
+
+        timeMS = 100;
+        timeMS--;
+
+        setInnerHTML(dsMS, timeMS);
+        setInnerHTML(dsS, timeS);
+      } else if (timeM > 0) {
+        timeM--;
+
+        timeS = 60;
+        timeS--;
+
+        setInnerHTML(dsS, timeS);
+        setInnerHTML(dsM, timeM);
+      } else if (timeH > 0) {
+        timeH--;
+
+        timeM = 60;
+        timeS = 60;
+        timeM--;
+        timeS--;
+
+        setInnerHTML(dsS, timeS);
+        setInnerHTML(dsM, timeM);
+        setInnerHTML(dsH, timeH);
+      } else {
+        window.clearInterval(countFN);
+        console.log("Window Alert");
+        timeUpAudio.play();
+        setTimeout(() => {
+          timeUpAudio2.play();
+        }, 500);
+      }
+      timeMS = 100;
     }
-
-    if (time[2] >= 60) {
-      time[1]++;
-      timeUpdate(timeMinutes, time[1]);
-      time[2] = 0;
-    }
-
-    if (time[1] >= 60) {
-      time[0]++;
-      timeUpdate(timehours, time[0]);
-      time[1] = 0;
-    }
-
-    timeUpdate(timeMiliSeconds, time[3]);
   }, 10);
 }
-
-timeReset.addEventListener("click", () => {
-  reset();
-});
-timeStart.addEventListener("click", () => {
-  playPause();
-});
-document.addEventListener("keyup", (event) => {
-  if (event.keyCode == 32 || event.keyCode == 13) {
-    playPause();
-  } else if (event.keyCode == 16) {
-    reset();
-  }
-});
