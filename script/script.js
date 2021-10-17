@@ -17,7 +17,7 @@ let timeH;
 let timeM;
 let timeS;
 let timeMS;
-let i = 1;
+let i = 0;
 let countFN;
 
 function closeForm() {
@@ -67,8 +67,11 @@ function startStop() {
 
 function count() {
   countFN = window.setInterval(() => {
-    timeMS--;
-    setInnerHTML(dsMS, timeMS);
+    if (timeMS > 0) {
+      timeMS--;
+      setInnerHTML(dsMS, timeMS);
+    }
+
     if (timeMS < 1) {
       if (timeS > 0) {
         timeS--;
@@ -103,7 +106,7 @@ function count() {
         timeUpAudio.play();
         setTimeout(() => {
           timeUpAudio2.play();
-        }, 500);
+        }, 450);
       }
       timeMS = 100;
     }

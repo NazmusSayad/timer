@@ -59,7 +59,7 @@ header > h1 {
   font-weight: bold;
 }
 form {
-  transition: 3s;
+  transition: 1s;
   display: none;
   font-weight: normal;
   padding: 100px 0;
