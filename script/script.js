@@ -1,3 +1,5 @@
+window.location.href = "?#";
+
 const inputH = document.querySelector(`#inputH`);
 const inputM = document.querySelector(`#inputM`);
 const inputS = document.querySelector(`#inputS`);
@@ -11,13 +13,15 @@ const dsS = document.querySelector(`#dsS`);
 const dsMS = document.querySelector(`#dsMS`);
 
 const timeUpAudio = new Audio("../media/1.webm");
-const timeUpAudio2 = new Audio("../media/2.webm");
+const timeUpAudio2 = new Audio("../media/2.wav");
+const timeUpAudio3 = new Audio("../media/2.wav");
 
 let timeH;
 let timeM;
 let timeS;
 let timeMS;
 let i = 0;
+let j = 0;
 let countFN;
 
 function closeForm() {
@@ -40,9 +44,9 @@ function submitForm() {
 
   window.clearInterval(countFN);
   startBtn.innerHTML = "Start";
-  i = 1;
 
-  console.log(timeH, timeM, timeS);
+  i = 1;
+  j = 1;
 }
 
 function setInnerHTML(a, b) {
@@ -54,7 +58,7 @@ function setInnerHTML(a, b) {
 }
 
 function startStop() {
-  if (i) {
+  if (i && j) {
     count();
     startBtn.innerHTML = "Stop";
     i = 0;
@@ -102,13 +106,28 @@ function count() {
         setInnerHTML(dsH, timeH);
       } else {
         window.clearInterval(countFN);
-        console.log("Window Alert");
-        timeUpAudio.play();
+
+        timeUpAudio2.play();
         setTimeout(() => {
-          timeUpAudio2.play();
-        }, 450);
+          timeUpAudio.play();
+          setTimeout(() => {
+            timeUpAudio3.play();
+          }, 1100);
+        }, 1200);
+
+        i = 0;
+        j = 0;
+        startBtn.innerHTML = "Start";
       }
       timeMS = 100;
     }
   }, 10);
 }
+
+document.addEventListener("keyup", (event) => {
+  if (event.keyCode == 32 || event.keyCode == 13) {
+    startStop();
+  } else if (event.keyCode == 16) {
+    openForm();
+  }
+});
